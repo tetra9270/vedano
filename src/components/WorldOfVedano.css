@@ -124,13 +124,25 @@
 }
 
 @media (max-width: 768px) {
+  .world-aman-section {
+    padding: 60px 20px;
+  }
+
   .world-aman-grid {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 40px;
   }
   
   .world-aman-main-title {
-    font-size: 32px;
-    margin-bottom: 40px;
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .world-aman-item-title {
+    font-size: 24px;
+  }
+
+  .world-aman-item-desc {
+    font-size: 14px;
   }
 }

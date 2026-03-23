@@ -90,13 +90,30 @@
 @media (max-width: 1024px) {
   .hideaway-grid {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
   
-  .hideaway-item {
+  .hideaway-img-wrap {
     height: 400px;
   }
-  
-  .hideaway-title {
-    font-size: 36px;
+}
+
+@media (max-width: 768px) {
+  .hideaway-section {
+    padding: 60px 20px;
+  }
+
+  .hideaway-img-wrap {
+    height: 300px;
+    margin-bottom: 20px;
+  }
+
+  .hideaway-item-title {
+    font-size: 26px;
+  }
+
+  .hideaway-item-desc {
+    font-size: 14px;
+    margin-bottom: 20px;
   }
 }

@@ -132,9 +132,13 @@
 }
 
 @media (max-width: 768px) {
+  .seasonal-section {
+    padding: 60px 0;
+  }
+
   .seasonal-header-item {
-    width: 300px;
-    padding-right: 20px;
+    width: 280px;
+    padding: 0 20px;
   }
   
   .seasonal-scroll-container {
@@ -142,10 +146,18 @@
   }
 
   .seasonal-item {
-    width: 300px;
+    width: 280px;
   }
   
   .seasonal-title {
-    font-size: 32px;
+    font-size: 28px;
+  }
+
+  .seasonal-intro {
+    font-size: 15px;
+  }
+
+  .seasonal-item-title {
+    font-size: 22px;
   }
 }

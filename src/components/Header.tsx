@@ -10,6 +10,7 @@ const LANGUAGES = [
 export const Header = () => {
   const [selectedLang, setSelectedLang] = useState(LANGUAGES[0]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,7 +25,11 @@ export const Header = () => {
   return (
     <header className="aman-header">
       <div className="header-left">
-        <button className="menu-btn" aria-label="Menu">
+        <button 
+          className={`menu-btn ${isMobileMenuOpen ? 'active' : ''}`} 
+          aria-label="Menu"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
           <div className="hamburger">
             <span></span>
             <span></span>
@@ -86,6 +91,16 @@ export const Header = () => {
         </div>
         <button className="reserve-btn">Book a Consultant</button>
       </div>
+
+      {isMobileMenuOpen && (
+        <div className="mobile-menu-overlay">
+          <nav className="mobile-nav">
+            <a href="/about" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>About Us</a>
+            <a href="/blogs" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Blogs</a>
+            <button className="mobile-reserve-btn">Book a Consultant</button>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
