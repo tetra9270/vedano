@@ -1,0 +1,113 @@
+.hero-video-container {
+  position: relative;
+  width: calc(100% - 80px); /* 40px margin on each side */
+  max-width: 1200px;
+  margin: 40px auto;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: #000;
+  border-radius: 4px; /* Optional slight rounding for premium feel */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1); /* Subtle dark overlay for better contrast */
+  pointer-events: none;
+}
+
+.video-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 30px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.4));
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hero-video-container:hover .video-controls {
+  opacity: 1;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: white;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.control-btn:hover {
+  transform: scale(1.1);
+}
+
+.progress-container {
+  flex: 1;
+  position: relative;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 5;
+  margin: 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #fff;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.time-display {
+  color: white;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  min-width: 45px;
+}
+
+@media (max-width: 768px) {
+  .hero-video-container {
+    height: 60vh; /* Shorter on mobile */
+    width: calc(100% - 40px);
+    margin: 20px auto;
+  }
+  
+  .video-controls {
+    opacity: 1;
+    padding: 15px;
+  }
+}

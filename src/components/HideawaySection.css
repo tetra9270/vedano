@@ -1,0 +1,102 @@
+.hideaway-section {
+  padding: 80px 40px;
+  background-color: #f6f5f0;
+  color: #2b2b2b;
+}
+
+.hideaway-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1.056fr; /* Exact Aman proportions approx */
+  gap: 60px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.hideaway-link {
+  display: inline-block;
+  font-size: 16px;
+  color: #2b2b2b;
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #2b2b2b;
+  font-weight: 300;
+  transition: opacity 0.2s ease;
+}
+
+.hideaway-link:hover {
+  opacity: 0.6;
+}
+
+.hideaway-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr; /* Asymmetrical layout */
+  gap: 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.hideaway-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.hideaway-img-wrap {
+  overflow: hidden;
+  height: 520px;
+  margin-bottom: 24px;
+}
+
+.hideaway-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hideaway-item-content {
+  max-width: 500px;
+}
+
+.hideaway-item-subtitle {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 300;
+  opacity: 0.7;
+}
+
+.hideaway-item-title {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.hideaway-item-desc {
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: #4a4a4a;
+  margin-bottom: 30px;
+  letter-spacing: 0.01em;
+}
+
+.hideaway-item:hover img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 1024px) {
+  .hideaway-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hideaway-item {
+    height: 400px;
+  }
+  
+  .hideaway-title {
+    font-size: 36px;
+  }
+}

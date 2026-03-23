@@ -1,0 +1,136 @@
+.world-aman-section {
+  padding: 100px 40px;
+  background-color: #f6f5f0;
+  color: #2b2b2b;
+}
+
+.world-aman-main-title {
+  font-size: 42px;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 80px;
+  letter-spacing: -0.01em;
+}
+
+.world-aman-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.world-aman-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.world-aman-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.world-aman-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.world-aman-item:hover .world-aman-img-wrap img {
+  transform: scale(1.03);
+}
+
+.gift-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.05); /* Very subtle overlay */
+  color: #fff;
+  pointer-events: none;
+}
+
+.gift-card-brand {
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  margin-bottom: 40px;
+}
+
+.gift-card-text {
+  position: absolute;
+  bottom: 40px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  opacity: 0.9;
+}
+
+.world-aman-item-subtitle {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 300;
+  opacity: 0.7;
+}
+
+.world-aman-item-title {
+  font-size: 28px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.world-aman-item-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: #4a4a4a;
+  margin-bottom: 30px;
+  letter-spacing: 0.01em;
+  flex: 1;
+}
+
+.world-aman-item-link {
+  display: inline-block;
+  font-size: 16px;
+  color: #2b2b2b;
+  text-decoration: none;
+  width: fit-content;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #2b2b2b;
+  font-weight: 300;
+  transition: opacity 0.2s ease;
+}
+
+.world-aman-item-link:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 1024px) {
+  .world-aman-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .world-aman-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  
+  .world-aman-main-title {
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+}
