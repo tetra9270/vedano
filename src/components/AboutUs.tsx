@@ -45,7 +45,7 @@ export const AboutUs = () => {
       {/* SECTION 1: HERO & THE IDEA */}
       <section 
         className="journey-section hero-about reveal-on-scroll" 
-        ref={(el) => (sectionRefs.current[0] = el)}
+        ref={(el) => { sectionRefs.current[0] = el; }}
       >
         <div className="journey-container">
           <div className="hero-about-header reveal-item delay-1">
@@ -74,7 +74,7 @@ export const AboutUs = () => {
       {/* SECTION 2: WHAT WE DO DIFFERENTLY */}
       <section 
         className="journey-section alt-bg reveal-on-scroll"
-        ref={(el) => (sectionRefs.current[1] = el)}
+        ref={(el) => { sectionRefs.current[1] = el; }}
       >
         <div className="journey-container">
           <div className="journey-grid reverse">
@@ -103,7 +103,7 @@ export const AboutUs = () => {
       {/* SECTION 3: DUBAI REALITY */}
       <section 
         className="journey-section dubai-context reveal-on-scroll"
-        ref={(el) => (sectionRefs.current[2] = el)}
+        ref={(el) => { sectionRefs.current[2] = el; }}
       >
         <div className="journey-container">
           <div className="center-content-box reveal-item delay-1">
@@ -126,7 +126,7 @@ export const AboutUs = () => {
       {/* SECTION 4: PHILOSOPHY */}
       <section 
         className="journey-section philosophy-accent reveal-on-scroll"
-        ref={(el) => (sectionRefs.current[3] = el)}
+        ref={(el) => { sectionRefs.current[3] = el; }}
       >
         <div className="journey-container">
           <div className="philosophy-grid">
@@ -149,7 +149,7 @@ export const AboutUs = () => {
       {/* SECTION 5: THE HANDS BEHIND VEDANO */}
       <section 
         className="journey-section hands-intro reveal-on-scroll"
-        ref={(el) => (sectionRefs.current[4] = el)}
+        ref={(el) => { sectionRefs.current[4] = el; }}
       >
         <div className="journey-container">
           <div className="journey-grid">
@@ -174,7 +174,7 @@ export const AboutUs = () => {
       {/* SECTION 6 & 7: GENERATIONS & VOLUME */}
       <section 
         className="journey-section alt-bg reveal-on-scroll"
-        ref={(el) => (sectionRefs.current[5] = el)}
+        ref={(el) => { sectionRefs.current[5] = el; }}
       >
         <div className="journey-container">
           <div className="dual-grid reveal-item delay-1">
@@ -208,7 +208,7 @@ export const AboutUs = () => {
       {/* SECTION 8 & 9: WHY IT MATTERS & THE RESULT */}
       <section 
         className="journey-section result-focus reveal-on-scroll"
-        ref={(el) => (sectionRefs.current[6] = el)}
+        ref={(el) => { sectionRefs.current[6] = el; }}
       >
         <div className="journey-container">
           <div className="journey-grid">
@@ -235,7 +235,7 @@ export const AboutUs = () => {
       {/* BOOK AN APPOINTMENT */}
       <section 
         className="journey-section appointment-section reveal-on-scroll"
-        ref={(el) => (sectionRefs.current[7] = el)}
+        ref={(el) => { sectionRefs.current[7] = el; }}
         id="book-appointment"
       >
         <div className="journey-container">
