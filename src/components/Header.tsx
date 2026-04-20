@@ -103,6 +103,19 @@ export const Header = ({ onOpenBooking }: { onOpenBooking: () => void }) => {
             <a href="/" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>{t('header.home')}</a>
             <a href="/about" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>{t('header.aboutUs')}</a>
             <a href="/blogs" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>{t('header.blogs')}</a>
+            
+            <div className="mobile-lang-selector">
+              {LANGUAGES.map(lang => (
+                <button 
+                  key={lang.code}
+                  className={`mobile-lang-btn ${language === lang.code ? 'active' : ''}`}
+                  onClick={() => { setLanguage(lang.code as any); setIsMobileMenuOpen(false); }}
+                >
+                  {lang.label}
+                </button>
+              ))}
+            </div>
+
             <button className="mobile-reserve-btn" onClick={() => { onOpenBooking(); setIsMobileMenuOpen(false); }}>{t('header.bookConsultant')}</button>
           </nav>
         </div>
