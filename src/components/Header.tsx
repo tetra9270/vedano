@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import './Header.css';
 
 const LANGUAGES = [
@@ -7,10 +8,13 @@ const LANGUAGES = [
   { code: 'ar', label: 'Arabic' },
 ];
 
-export const Header = () => {
-  const [selectedLang, setSelectedLang] = useState(LANGUAGES[0]);
+export const Header = ({ onOpenBooking }: { onOpenBooking: () => void }) => {
+  const { language, setLanguage, t } = useLanguage();
+  const selectedLang = LANGUAGES.find(l => l.code === language) || LANGUAGES[0];
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,7 +31,7 @@ export const Header = () => {
       <div className="header-left">
         <button 
           className={`menu-btn ${isMobileMenuOpen ? 'active' : ''}`} 
-          aria-label="Menu"
+          aria-label={t('header.menu')}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <div className="hamburger">
@@ -35,17 +39,18 @@ export const Header = () => {
             <span></span>
             <span></span>
           </div>
-          <span className="menu-text">Menu</span>
+          <span className="menu-text">{t('header.menu')}</span>
         </button>
-        <button className="search-btn" aria-label="Search">
+        <button className="search-btn" aria-label="Search" onClick={() => setIsSearchOpen(true)}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </button>
         <nav className="header-nav">
-          <a href="/about" className="nav-link">About Us</a>
-          <a href="/blogs" className="nav-link">Blogs</a>
+          <a href="/" className="nav-link">{t('header.home')}</a>
+          <a href="/about" className="nav-link">{t('header.aboutUs')}</a>
+          <a href="/blogs" className="nav-link">{t('header.blogs')}</a>
         </nav>
       </div>
 
@@ -81,7 +86,7 @@ export const Header = () => {
                   key={lang.code}
                   role="option"
                   className="lang-option"
-                  onClick={() => { setSelectedLang(lang); setDropdownOpen(false); }}
+                  onClick={() => { setLanguage(lang.code as any); setDropdownOpen(false); }}
                 >
                   {lang.label}
                 </li>
@@ -89,16 +94,47 @@ export const Header = () => {
             </ul>
           )}
         </div>
-        <button className="reserve-btn">Book a Consultant</button>
+        <button className="reserve-btn" onClick={onOpenBooking}>{t('header.bookConsultant')}</button>
       </div>
 
       {isMobileMenuOpen && (
         <div className="mobile-menu-overlay">
           <nav className="mobile-nav">
-            <a href="/about" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>About Us</a>
-            <a href="/blogs" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Blogs</a>
-            <button className="mobile-reserve-btn">Book a Consultant</button>
+            <a href="/" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>{t('header.home')}</a>
+            <a href="/about" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>{t('header.aboutUs')}</a>
+            <a href="/blogs" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>{t('header.blogs')}</a>
+            <button className="mobile-reserve-btn" onClick={() => { onOpenBooking(); setIsMobileMenuOpen(false); }}>{t('header.bookConsultant')}</button>
           </nav>
+        </div>
+      )}
+      {isSearchOpen && (
+        <div className="search-overlay">
+          <div className="search-overlay-content">
+            <button className="close-search-btn" onClick={() => setIsSearchOpen(false)}>✕</button>
+            <input 
+              type="text" 
+              className="search-input" 
+              placeholder="Search / البحث / Rechercher..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              autoFocus
+            />
+            {searchQuery && (
+              <div className="search-results-box">
+                {['Home', 'About Us', 'Blogs']
+                  .filter(item => item.toLowerCase().includes(searchQuery.toLowerCase()))
+                  .map((result, idx) => (
+                  <a 
+                    key={idx} 
+                    href={result === 'Home' ? '/' : `/${result.toLowerCase().replace(' ', '')}`} 
+                    className="search-result-link"
+                  >
+                    {result === 'Home' ? t('header.home') : result === 'About Us' ? t('header.aboutUs') : t('header.blogs')}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </header>

@@ -1,0 +1,139 @@
+.booking-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(43, 43, 43, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: modalFadeIn 0.3s ease-out forwards;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; backdrop-filter: blur(0px); }
+  to { opacity: 1; backdrop-filter: blur(8px); }
+}
+
+.booking-modal-container {
+  background-color: #f6f5f0;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh; /* Changed from no height constraint to make it responsive */
+  overflow-y: auto; /* Added scroll if content exceeds screen height */
+  padding: 40px 30px; /* Reduced paddings */
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom scrollbar for modal */
+.booking-modal-container::-webkit-scrollbar {
+  width: 6px;
+}
+.booking-modal-container::-webkit-scrollbar-thumb {
+  background-color: rgba(43, 43, 43, 0.2);
+  border-radius: 4px;
+}
+
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.booking-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #2b2b2b;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+[dir="rtl"] .booking-modal-close {
+  right: auto;
+  left: 20px;
+}
+
+.booking-modal-close:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+.booking-modal-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.booking-modal-header .journey-h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.booking-modal-header p {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Override AboutUs form styles for density */
+.modal-form {
+  padding: 0 !important; 
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.modal-form .form-group {
+  margin-bottom: 25px !important;
+}
+
+.modal-form input,
+.modal-form textarea {
+  padding: 10px 0 !important;
+}
+
+.modal-form textarea {
+  height: 80px;
+  resize: none;
+}
+
+.modal-form .submit-btn-luxury {
+  padding: 18px !important;
+  margin-top: 15px !important;
+}
+
+.modal-error {
+  color: #c93a3a;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.booking-modal-success {
+  text-align: center;
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.booking-modal-success h2 {
+  font-size: 1.5rem;
+  color: #2b2b2b;
+}
+
+@media (max-width: 480px) {
+  .booking-modal-container {
+    padding: 30px 20px;
+    width: 95%;
+  }
+}

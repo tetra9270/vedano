@@ -1,8 +1,10 @@
+import { useLanguage } from '../context/LanguageContext';
 import './HideawaySection.css';
 import atelierImg from '../assets/vedano_atelier.png';
 import detailImg from '../assets/vedano_bespoke_detail.png';
 
 export const HideawaySection = () => {
+  const { t } = useLanguage();
   return (
     <section className="hideaway-section">
       <div className="hideaway-grid">
@@ -11,10 +13,10 @@ export const HideawaySection = () => {
             <img src={atelierImg} alt="Vedano Atelier" />
           </div>
           <div className="hideaway-item-content">
-            <span className="hideaway-subtitle">THE SANCTUARY OF STYLE</span>
-            <h3 className="hideaway-title">Where Your Legacy Is Crafted</h3>
-            <p className="hideaway-desc">Step into a world where time slows down and perfection takes shape. The Vedano Atelier is the birthplace of your most confident self.</p>
-            <a href="/atelier" className="hideaway-link">Explore the Atelier</a>
+            <span className="hideaway-subtitle">{t('hideaway.sanctuarySubtitle')}</span>
+            <h3 className="hideaway-title">{t('hideaway.sanctuaryTitle')}</h3>
+            <p className="hideaway-desc">{t('hideaway.sanctuaryDesc')}</p>
+            <a href="/atelier" className="hideaway-link">{t('hideaway.exploreAtelier')}</a>
           </div>
         </div>
         <div className="hideaway-item wide">
@@ -22,10 +24,10 @@ export const HideawaySection = () => {
             <img src={detailImg} alt="Bespoke Elegance" />
           </div>
           <div className="hideaway-item-content">
-            <span className="hideaway-subtitle">MASTERPIECE IN MOTION</span>
-            <h3 className="hideaway-title">The Gold Standard of Personal Elegance</h3>
-            <p className="hideaway-desc">More than a suit; a second skin. Measured to the millimetre and hand-finished with a passion that transcends mere fashion.</p>
-            <a href="/bespoke" className="hideaway-link">Start Your Journey</a>
+            <span className="hideaway-subtitle">{t('hideaway.masterpieceSubtitle')}</span>
+            <h3 className="hideaway-title">{t('hideaway.masterpieceTitle')}</h3>
+            <p className="hideaway-desc">{t('hideaway.masterpieceDesc')}</p>
+            <a href="/bespoke" className="hideaway-link">{t('hideaway.startJourney')}</a>
           </div>
         </div>
       </div>

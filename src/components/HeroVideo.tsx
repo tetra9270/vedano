@@ -1,8 +1,10 @@
 import { useState, useRef } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import './HeroVideo.css';
 import heroVideo from '../assets/Vedano.D2.mp4';
 
 export const HeroVideo = () => {
+  const { t } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
@@ -67,7 +69,7 @@ export const HeroVideo = () => {
         onLoadedMetadata={handleLoadedMetadata}
       >
         <source src={heroVideo} type="video/mp4" />
-        Your browser does not support the video tag.
+        {t('hero.noVideoSupport')}
       </video>
       <div className="hero-overlay"></div>
       

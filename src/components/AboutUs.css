@@ -5,7 +5,7 @@
 }
 
 .journey-section {
-  padding: 160px 0;
+  padding: 60px 0;
   position: relative;
 }
 
@@ -136,6 +136,10 @@
   font-weight: 300;
 }
 
+.journey-text p:last-child, .dual-item p:last-child, .journey-text .journey-list:last-child {
+  margin-bottom: 0;
+}
+
 .journey-list {
   list-style: none;
   padding: 0;
@@ -208,6 +212,7 @@
   letter-spacing: 0.1em;
   font-weight: 200;
   opacity: 0.8;
+  white-space: nowrap;
 }
 
 .phil-summary {
@@ -344,6 +349,7 @@
   .lead-text { font-size: 1.4rem !important; margin-bottom: 30px !important; }
   .journey-grid, .journey-grid.reverse, .dual-grid { gap: 50px; }
   .section-h3 { font-size: 1.5rem; }
+  .phil-heading { white-space: normal; }
 }
 
 @media (max-width: 480px) {

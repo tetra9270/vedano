@@ -1,57 +1,60 @@
+import { useLanguage } from '../context/LanguageContext';
 import './Footer.css';
 
-const FOOTER_LINKS = {
-  moreInfo: [
-    { label: 'Vedano Group', links: ['- Vedano', '- Vedano Essentials', '- Vedano Interiors', '- Vedano Bespoke'] },
-    { label: 'Gift Card', links: [] },
-    { label: 'Forthcoming Services', links: [] },
-    { label: 'Careers', links: [] },
-    { label: 'Leadership', links: [] },
-    { label: 'Sustainability', links: [] },
-    { label: 'Privacy Notice', links: [] },
-    { label: 'Cookie Policy', links: [] }
-  ],
-  destinations: [
-    {
-      region: 'Atelier Location',
-      items: [
-        'Vedano Dubai'
-      ]
-    },
-    {
-      region: 'Services',
-      items: [
-        'Bespoke Tailoring',
-        'Made-to-Measure',
-        'Personal Styling',
-        'Wardrobe Consultation',
-        'Wedding Atelier',
-        'Corporate Bespoke'
-      ]
-    }
-  ]
-};
-
 export const Footer = () => {
+  const { t } = useLanguage();
+
+  const FOOTER_LINKS = {
+    moreInfo: [
+      { label: 'Vedano Group', links: ['- Vedano', '- Vedano Essentials', '- Vedano Interiors', '- Vedano Bespoke'] },
+      { label: 'Gift Card', links: [] },
+      { label: 'Forthcoming Services', links: [] },
+      { label: 'Careers', links: [] },
+      { label: 'Leadership', links: [] },
+      { label: 'Sustainability', links: [] },
+      { label: 'Privacy Notice', links: [] },
+      { label: 'Cookie Policy', links: [] }
+    ],
+    destinations: [
+      {
+        region: 'Atelier Location',
+        items: [
+          'Vedano Dubai'
+        ]
+      },
+      {
+        region: 'Services',
+        items: [
+          'Bespoke Tailoring',
+          'Made-to-Measure',
+          'Personal Styling',
+          'Wardrobe Consultation',
+          'Wedding Atelier',
+          'Corporate Bespoke'
+        ]
+      }
+    ]
+  };
+
   return (
     <footer className="aman-footer">
       <div className="footer-signup">
         <div className="signup-left">
-          <h2 className="signup-title">Get inspired</h2>
+          <h2 className="signup-title">{t('footer.signupTitle')}</h2>
         </div>
         <div className="signup-center">
           <p className="signup-desc">
-            To receive updates about exclusive garment releases, atelier events, and more, please register your interest.
+            {t('footer.signupDesc')}
           </p>
         </div>
         <div className="signup-right">
-          <button className="signup-btn">Sign Up</button>
+          <button className="signup-btn">{t('footer.signUpBtn')}</button>
         </div>
       </div>
 
       <div className="footer-nav">
         <div className="nav-column">
-          <h3 className="nav-title">More information</h3>
+          <h3 className="nav-title">{t('footer.moreInfoTitle')}</h3>
           <ul className="nav-list">
             {FOOTER_LINKS.moreInfo.map((item, i) => (
               <li key={i} className="nav-item">
@@ -67,12 +70,12 @@ export const Footer = () => {
             ))}
           </ul>
           <div className="footer-contact">
-            <button className="contact-btn">Contact Us</button>
+            <button className="contact-btn">{t('footer.contactUs')}</button>
           </div>
         </div>
 
         <div className="nav-destinations">
-          <h3 className="nav-title">Vedano World</h3>
+          <h3 className="nav-title">{t('footer.vedanoWorldTitle')}</h3>
           <div className="destination-columns">
             {FOOTER_LINKS.destinations.map((region, i) => (
               <div key={i} className="destination-col">
@@ -92,7 +95,7 @@ export const Footer = () => {
         <div className="footer-logo">VEDANO</div>
         
         <div className="footer-social-section">
-          <span className="social-label">Follow us on:</span>
+          <span className="social-label">{t('footer.followUs')}</span>
           {/* ... existing social icons ... */}
           <div className="social-icons">
             <a href="#fb" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
@@ -109,7 +112,7 @@ export const Footer = () => {
         </div>
 
         <div className="footer-copyright">
-          <span>Copyright 2026, Vedano Group S.a.r.l.</span>
+          <span>{t('footer.copyright')}</span>
         </div>
       </div>
     </footer>
