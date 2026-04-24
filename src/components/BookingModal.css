@@ -44,16 +44,22 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.appointment-form input,
-.appointment-form textarea {
+.modal-form input,
+.modal-form textarea {
   width: 100%;
-  padding: 12px 0;
+  padding: 15px 0 !important;
   border: none;
+  border-bottom: 1px solid rgba(43, 43, 43, 0.2);
   background: transparent;
   font-size: 1rem;
-  color: #f6f5f0;
+  color: #2b2b2b !important;
   outline: none;
   font-family: inherit;
+}
+
+.modal-form input:focus,
+.modal-form textarea:focus {
+  border-bottom: 1px solid #2b2b2b;
 }
 
 .phone-group {
@@ -62,11 +68,11 @@
   gap: 10px;
 }
 
-.country-code-select {
+.modal-form .country-code-select {
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(246, 245, 240, 0.2);
-  color: #f6f5f0;
+  border-bottom: 1px solid rgba(43, 43, 43, 0.2);
+  color: #2b2b2b;
   font-size: 1rem;
   padding: 12px 5px 12px 0;
   outline: none;
@@ -76,18 +82,23 @@
   flex-shrink: 0;
 }
 
-.country-code-select option {
-  background-color: #0a0b10;
-  color: #f6f5f0;
+.modal-form .country-code-select option {
+  background-color: #f6f5f0;
+  color: #2b2b2b;
 }
 
 .phone-input {
   flex-grow: 1;
 }
 
-.appointment-form input::placeholder,
-.appointment-form textarea::placeholder {
-  color: rgba(246, 245, 240, 0.5);
+.modal-form input::placeholder,
+.modal-form textarea::placeholder {
+  color: rgba(43, 43, 43, 0.5) !important;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 25px;
 }
 
 .booking-modal-close {
