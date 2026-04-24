@@ -20,10 +20,12 @@ export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product
   const [isVisible, setIsVisible] = useState(false);
   const [userFace, setUserFace] = useState<string | null>(null);
   const [isCameraActive, setIsCameraActive] = useState(false);
+  const [facePosition, setFacePosition] = useState({ top: 15, left: 50, size: 18 });
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -46,12 +48,20 @@ export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product
     };
   }, []);
 
+  // Attach stream to video element when camera becomes active
+  useEffect(() => {
+    if (isCameraActive && videoRef.current && streamRef.current) {
+      videoRef.current.srcObject = streamRef.current;
+    }
+  }, [isCameraActive]);
+
   const handleReset = () => {
     stopCamera();
     if (userFace && userFace.startsWith('blob:')) {
       URL.revokeObjectURL(userFace);
     }
     setUserFace(null);
+    setFacePosition({ top: 15, left: 50, size: 18 });
   };
 
   const handleClose = () => {
@@ -69,6 +79,10 @@ export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product
       setUserFace(imageUrl);
       stopCamera();
     }
+    // Reset input value so the same file can be uploaded again if needed
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   const triggerFileInput = () => {
@@ -78,10 +92,8 @@ export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      streamRef.current = stream;
       setIsCameraActive(true);
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
     } catch (err) {
       console.error("Error accessing camera:", err);
       alert("Unable to access camera. Please check your permissions.");
@@ -90,9 +102,12 @@ export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product
 
   const stopCamera = () => {
     setIsCameraActive(false);
-    if (videoRef.current && videoRef.current.srcObject) {
-      const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
+    if (streamRef.current) {
+      const tracks = streamRef.current.getTracks();
       tracks.forEach(track => track.stop());
+      streamRef.current = null;
+    }
+    if (videoRef.current) {
       videoRef.current.srcObject = null;
     }
   };
@@ -133,7 +148,16 @@ export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product
               <div className="try-on-image-wrapper">
                 <img src={product.tryOnImage} alt={product.name} className="try-on-main-image" />
                 {userFace && (
-                  <img src={userFace} alt="User Face" className="user-face-overlay" />
+                  <img 
+                    src={userFace} 
+                    alt="User Face" 
+                    className="user-face-overlay" 
+                    style={{
+                      top: `${facePosition.top}%`,
+                      left: `${facePosition.left}%`,
+                      width: `${facePosition.size}%`,
+                    }}
+                  />
                 )}
               </div>
             )}
@@ -170,9 +194,26 @@ export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product
                 )}
               </div>
               {userFace && (
-                <button className="action-btn reset-btn" onClick={handleReset} style={{ marginTop: '10px' }}>
-                  Reset Face
-                </button>
+                <>
+                  <div className="face-adjust-controls">
+                    <h4 style={{ color: '#c9a96e', fontSize: '0.9rem', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '1px' }}>Adjust Position & Size</h4>
+                    <div className="slider-group">
+                      <label>Up / Down</label>
+                      <input type="range" min="0" max="100" value={facePosition.top} onChange={(e) => setFacePosition({...facePosition, top: Number(e.target.value)})} />
+                    </div>
+                    <div className="slider-group">
+                      <label>Left / Right</label>
+                      <input type="range" min="0" max="100" value={facePosition.left} onChange={(e) => setFacePosition({...facePosition, left: Number(e.target.value)})} />
+                    </div>
+                    <div className="slider-group">
+                      <label>Size</label>
+                      <input type="range" min="5" max="50" value={facePosition.size} onChange={(e) => setFacePosition({...facePosition, size: Number(e.target.value)})} />
+                    </div>
+                  </div>
+                  <button className="action-btn reset-btn" onClick={handleReset} style={{ marginTop: '10px' }}>
+                    Reset Face
+                  </button>
+                </>
               )}
             </div>
 

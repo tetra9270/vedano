@@ -240,17 +240,15 @@
 
 .user-face-overlay {
   position: absolute;
-  top: 12%; /* Approximate head position */
-  left: 50%;
   transform: translateX(-50%);
-  width: 14%; /* Relative to the image width */
   aspect-ratio: 3 / 4; /* Oval face shape */
   border-radius: 50%;
   object-fit: cover;
   z-index: 5;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   animation: fade-in 0.5s ease-out;
+  transition: top 0.1s, left 0.1s, width 0.1s;
 }
 
 @keyframes fade-in {
@@ -359,3 +357,29 @@
 .reset-btn:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
+.face-adjust-controls {
+  margin-top: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.slider-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.slider-group label {
+  font-size: 0.8rem;
+  color: rgba(244, 241, 235, 0.8);
+  width: 90px;
+  text-transform: uppercase;
+}
+
+.slider-group input[type="range"] {
+  flex: 1;
+  accent-color: #c9a96e;
+}
+
