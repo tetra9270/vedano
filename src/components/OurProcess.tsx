@@ -74,7 +74,7 @@ export const OurProcess: React.FC = () => {
           <div 
             key={idx} 
             className={`process-step ${idx % 2 === 0 ? 'left' : 'right'}`}
-            ref={el => stepRefs.current[idx] = el}
+            ref={el => { stepRefs.current[idx] = el; }}
           >
             <div className="process-content-box">
               <span className="process-num">{step.num}</span>

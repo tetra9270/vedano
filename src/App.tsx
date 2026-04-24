@@ -4,7 +4,6 @@ import { HeroVideo } from './components/HeroVideo';
 import { BrandStatement } from './components/BrandStatement';
 import { HideawaySection } from './components/HideawaySection';
 import { SeasonalExperiences } from './components/SeasonalExperiences';
-import { WorldOfVedano } from './components/WorldOfVedano';
 import { AboutUs } from './components/AboutUs';
 import { Blogs } from './components/Blogs';
 import { Footer } from './components/Footer';
