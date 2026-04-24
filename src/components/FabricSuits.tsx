@@ -128,9 +128,8 @@ export const FabricSuits: React.FC = () => {
         <div className="suits-grid">
           {products.map((product, index) => (
             <div 
-              className="suit-card-wrapper fade-in-up" 
+              className="suit-card-wrapper" 
               key={product.id}
-              style={{ animationDelay: `${0.4 + index * 0.2}s` }}
             >
               <div className="suit-card">
                 <div className="suit-card-inner">
