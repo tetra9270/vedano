@@ -39,10 +39,10 @@ function App() {
           <>
             <HeroVideo />
             <FabricSuits />
-            <ServicesWeOffer />
             <BrandStatement />
             <HideawaySection />
             <SeasonalExperiences />
+            <ServicesWeOffer />
             <Blogs />
           </>
         )}
