@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { HeroVideo } from './components/HeroVideo';
 import { BrandStatement } from './components/BrandStatement';
@@ -9,11 +9,20 @@ import { AboutUs } from './components/AboutUs';
 import { Blogs } from './components/Blogs';
 import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
+import { FabricSuits } from './components/FabricSuits';
 import './App.css';
 
 function App() {
   const path = window.location.pathname;
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsBookingOpen(true);
+    }, 5000); // Opens after 5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="app-container">
@@ -29,6 +38,7 @@ function App() {
             <BrandStatement />
             <HideawaySection />
             <SeasonalExperiences />
+            <FabricSuits />
             <WorldOfVedano />
           </>
         )}

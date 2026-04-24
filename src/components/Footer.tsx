@@ -6,14 +6,9 @@ export const Footer = () => {
 
   const FOOTER_LINKS = {
     moreInfo: [
-      { label: 'Vedano Group', links: ['- Vedano', '- Vedano Essentials', '- Vedano Interiors', '- Vedano Bespoke'] },
+      { label: 'Vedano Group', links: ['- Vedano'] },
       { label: 'Gift Card', links: [] },
-      { label: 'Forthcoming Services', links: [] },
-      { label: 'Careers', links: [] },
-      { label: 'Leadership', links: [] },
-      { label: 'Sustainability', links: [] },
-      { label: 'Privacy Notice', links: [] },
-      { label: 'Cookie Policy', links: [] }
+      { label: 'Forthcoming Services', links: [] }
     ],
     destinations: [
       {
@@ -85,6 +80,20 @@ export const Footer = () => {
                     <li key={j} className="destination-item"><a href={`#${item}`}>{item}</a></li>
                   ))}
                 </ul>
+                {region.region === 'Atelier Location' && (
+                  <div className="footer-map-container" style={{ marginTop: '20px', borderRadius: '4px', overflow: 'hidden', height: '150px', width: '100%' }}>
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115681.29592731265!2d55.1453939!3d25.0750095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sus!4v1713898192345!5m2!1sen!2sus" 
+                      width="100%" 
+                      height="100%" 
+                      style={{ border: 0 }} 
+                      allowFullScreen={true} 
+                      loading="lazy" 
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Vedano Dubai Location"
+                    ></iframe>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -98,16 +107,12 @@ export const Footer = () => {
           <span className="social-label">{t('footer.followUs')}</span>
           {/* ... existing social icons ... */}
           <div className="social-icons">
-            <a href="#fb" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
-            <a href="#x" aria-label="X"><i className="fab fa-x-twitter"></i></a>
             <a href="#ig" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+            <a href="#x" aria-label="X"><i className="fab fa-x-twitter"></i></a>
             <a href="#yt" aria-label="YouTube"><i className="fab fa-youtube"></i></a>
-            <a href="#pi" aria-label="Pinterest"><i className="fab fa-pinterest-p"></i></a>
-            <a href="#we" aria-label="Weibo"><i className="fab fa-weibo"></i></a>
-            <a href="#li" aria-label="Line"><i className="fab fa-line"></i></a>
-            <a href="#wechat" aria-label="WeChat"><i className="fab fa-weixin"></i></a>
-            <a href="#red" aria-label="Little Red Book"><i className="fas fa-book-open"></i></a>
+            <a href="#fb" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
             <a href="#wa" aria-label="WhatsApp"><i className="fab fa-whatsapp"></i></a>
+            <a href="#tiktok" aria-label="TikTok"><i className="fab fa-tiktok"></i></a>
           </div>
         </div>
 

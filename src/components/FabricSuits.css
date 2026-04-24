@@ -1,0 +1,203 @@
+.fabric-suits-section {
+  padding: 100px 5%;
+  background-color: transparent; /* Remove black background */
+  color: #333333;
+  overflow: hidden;
+}
+
+.fabric-suits-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.fabric-suits-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.fabric-suits-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+  color: #c9a96e; /* Gold color from the theme */
+}
+
+.fabric-suits-header p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #555555;
+  line-height: 1.6;
+}
+
+.suits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  perspective: 1000px; /* Gives the 3D effect space to work */
+}
+
+.suit-card-wrapper {
+  aspect-ratio: 3 / 4;
+}
+
+.suit-card {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.suit-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+/* Flip the card on hover */
+.suit-card:hover .suit-card-inner {
+  transform: rotateY(180deg);
+}
+
+.suit-card-front, .suit-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f6f5f0;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+}
+
+.suit-card-front img, .suit-card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s ease;
+}
+
+/* Optional slight scale on image when hovered, before flip completes */
+.suit-card:hover .suit-card-front img {
+  transform: scale(1.05);
+}
+
+.suit-card-title-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px 20px 30px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+  text-align: left;
+}
+
+.suit-card-title-overlay h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff; /* Explicitly white text so it's visible */
+}
+
+.suit-card-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.suit-card-back::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); /* Dark overlay to make text readable */
+  z-index: 1;
+}
+
+.suit-card-back-content {
+  position: relative;
+  z-index: 2;
+  padding: 15px; /* Reduced padding to give more space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.suit-card-back-content p {
+  font-size: 0.9rem; /* Smaller font to ensure it fits */
+  line-height: 1.4;
+  margin-bottom: 15px; /* Less margin before the button */
+  color: #ffffff;
+  padding: 0 10px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition-delay: 0.2s; /* Delay until flip is halfway */
+}
+
+.suit-card:hover .suit-card-back-content p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.try-it-btn {
+  background-color: transparent;
+  color: #c9a96e;
+  border: 1px solid #c9a96e;
+  padding: 10px 24px; /* Slightly smaller button padding */
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease, background-color 0.3s, color 0.3s;
+  transition-delay: 0.3s;
+}
+
+.suit-card:hover .try-it-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.try-it-btn:hover {
+  background-color: #c9a96e;
+  color: #111;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(201, 169, 110, 0.3);
+}
+
+/* Animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
