@@ -32,10 +32,21 @@ h1, h2, h3, h4, h5, h6 {
   word-wrap: break-word;
 }
 
+p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #4a4a4a;
+  font-weight: 300;
+}
+
 @media (max-width: 768px) {
   h1 { font-size: 2.2rem !important; }
   h2 { font-size: 1.8rem !important; }
   h3 { font-size: 1.4rem !important; }
+  p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
 }
 
 [dir="rtl"] body {
