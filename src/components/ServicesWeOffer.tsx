@@ -40,7 +40,7 @@ export const ServicesWeOffer: React.FC = () => {
   return (
     <section className="services-offer-section" ref={sectionRef}>
       <div className="services-offer-container">
-        <h2 className="services-offer-title fade-in-up">SERVICES WE OFFER</h2>
+        <h2 className="services-offer-title fade-in-up">Services We Offer</h2>
         <div className="services-offer-grid">
           {services.map((service, index) => (
             <div 
