@@ -147,42 +147,27 @@
 }
 
 .suit-card-back-content p {
-  font-size: 0.9rem; /* Smaller font to ensure it fits */
-  line-height: 1.4;
-  margin-bottom: 15px; /* Less margin before the button */
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
   color: #ffffff;
   padding: 0 10px;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  transition-delay: 0.2s; /* Delay until flip is halfway */
-}
-
-.suit-card:hover .suit-card-back-content p {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .try-it-btn {
   background-color: transparent;
   color: #c9a96e;
   border: 1px solid #c9a96e;
-  padding: 10px 24px; /* Slightly smaller button padding */
+  padding: 12px 30px;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 2px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
   border-radius: 4px;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease, background-color 0.3s, color 0.3s;
-  transition-delay: 0.3s;
-}
-
-.suit-card:hover .try-it-btn {
-  opacity: 1;
-  transform: translateY(0);
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .try-it-btn:hover {
