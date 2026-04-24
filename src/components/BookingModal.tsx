@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { countryCodes } from '../utils/countryCodes';
 import './BookingModal.css';
 
 interface BookingModalProps {
@@ -113,20 +114,13 @@ export const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
                   onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
                   disabled={isSubmitting}
                 >
-                  <option value="+971">UAE (+971)</option>
-                  <option value="+1">USA/CAN (+1)</option>
-                  <option value="+44">UK (+44)</option>
-                  <option value="+966">KSA (+966)</option>
-                  <option value="+974">Qatar (+974)</option>
-                  <option value="+965">Kuwait (+965)</option>
-                  <option value="+973">Bahrain (+973)</option>
-                  <option value="+968">Oman (+968)</option>
-                  <option value="+91">India (+91)</option>
-                  <option value="+92">Pakistan (+92)</option>
-                  <option value="+33">France (+33)</option>
-                  <option value="+49">Germany (+49)</option>
-                  <option value="+39">Italy (+39)</option>
-                  <option value="+61">Australia (+61)</option>
+                  <option value="+971">United Arab Emirates (+971)</option>
+                  <option disabled>──────────</option>
+                  {countryCodes.map((country, idx) => (
+                    <option key={idx} value={country.code}>
+                      {country.name}
+                    </option>
+                  ))}
                 </select>
                 <input 
                   type="tel" 
