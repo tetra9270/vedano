@@ -11,6 +11,7 @@
     "server": "node server/index.js"
   },
   "dependencies": {
+    "@vladmandic/face-api": "^1.7.15",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "react": "^19.2.4",

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import * as faceapi from '@vladmandic/face-api';
 import './TryOnModal.css';
 
 interface Product {
@@ -19,13 +20,32 @@ interface TryOnModalProps {
 export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [userFace, setUserFace] = useState<string | null>(null);
+  const [croppedUserFace, setCroppedUserFace] = useState<string | null>(null);
   const [isCameraActive, setIsCameraActive] = useState(false);
-  const [facePosition, setFacePosition] = useState({ top: 15, left: 50, size: 18 });
+  const [isModelsLoaded, setIsModelsLoaded] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [overlayStyle, setOverlayStyle] = useState({});
+  const [modelFaceBox, setModelFaceBox] = useState<faceapi.Box | null>(null);
+  const [modelImgSize, setModelImgSize] = useState({ width: 0, height: 0 });
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
+  const modelImgRef = useRef<HTMLImageElement>(null);
+
+  // Load face-api models
+  useEffect(() => {
+    const loadModels = async () => {
+      try {
+        await faceapi.nets.tinyFaceDetector.loadFromUri('https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/');
+        setIsModelsLoaded(true);
+      } catch (err) {
+        console.error("Failed to load face-api models", err);
+      }
+    };
+    loadModels();
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -61,7 +81,93 @@ export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product
       URL.revokeObjectURL(userFace);
     }
     setUserFace(null);
-    setFacePosition({ top: 15, left: 50, size: 18 });
+    setCroppedUserFace(null);
+    setOverlayStyle({});
+  };
+
+  // Detect model face when product changes
+  useEffect(() => {
+    if (product && isModelsLoaded && modelImgRef.current) {
+      const img = modelImgRef.current;
+      if (img.complete) {
+        detectModelFace(img);
+      } else {
+        img.onload = () => detectModelFace(img);
+      }
+    }
+  }, [product, isModelsLoaded]);
+
+  const detectModelFace = async (img: HTMLImageElement) => {
+    const detection = await faceapi.detectSingleFace(img, new faceapi.TinyFaceDetectorOptions());
+    if (detection) {
+      setModelFaceBox(detection.box);
+      setModelImgSize({ width: img.naturalWidth, height: img.naturalHeight });
+    }
+  };
+
+  const processUserFace = async (imageUrl: string) => {
+    setIsProcessing(true);
+    const img = new Image();
+    img.src = imageUrl;
+    await new Promise(r => img.onload = r);
+
+    const detection = await faceapi.detectSingleFace(img, new faceapi.TinyFaceDetectorOptions());
+    if (!detection) {
+      alert("Could not clearly detect a face. Please try another photo.");
+      setIsProcessing(false);
+      return;
+    }
+
+    const box = detection.box;
+    // Padding to capture full head
+    const padX = box.width * 0.3;
+    const padYTop = box.height * 0.5;
+    const padYBot = box.height * 0.2;
+
+    const cropX = Math.max(0, box.x - padX);
+    const cropY = Math.max(0, box.y - padYTop);
+    const cropW = Math.min(img.width - cropX, box.width + padX * 2);
+    const cropH = Math.min(img.height - cropY, box.height + padYTop + padYBot);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = cropW;
+    canvas.height = cropH;
+    const ctx = canvas.getContext('2d');
+    
+    if (ctx) {
+      // Create oval mask for seamless blending
+      ctx.beginPath();
+      ctx.ellipse(cropW/2, cropH/2, cropW/2, cropH/2, 0, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(img, cropX, cropY, cropW, cropH, 0, 0, cropW, cropH);
+      
+      setCroppedUserFace(canvas.toDataURL('image/png'));
+      
+      if (modelFaceBox && modelImgSize.width > 0) {
+        const scale = modelFaceBox.width / box.width;
+        const overlayW = cropW * scale;
+        const overlayH = cropH * scale;
+        
+        const overlayX = modelFaceBox.x - (box.x - cropX) * scale;
+        const overlayY = modelFaceBox.y - (box.y - cropY) * scale;
+        
+        setOverlayStyle({
+          position: 'absolute',
+          left: `${(overlayX / modelImgSize.width) * 100}%`,
+          top: `${(overlayY / modelImgSize.height) * 100}%`,
+          width: `${(overlayW / modelImgSize.width) * 100}%`,
+          height: `${(overlayH / modelImgSize.height) * 100}%`,
+          objectFit: 'cover',
+          zIndex: 5,
+          borderRadius: '50%',
+          boxShadow: '0 0 15px rgba(0,0,0,0.5)',
+          animation: 'fade-in 0.5s ease-out'
+        });
+      }
+    }
+    setUserFace(imageUrl);
+    setIsProcessing(false);
   };
 
   const handleClose = () => {
@@ -73,13 +179,12 @@ export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product
     const file = e.target.files?.[0];
     if (file) {
       if (userFace && userFace.startsWith('blob:')) {
-        URL.revokeObjectURL(userFace); // Clean up previous
+        URL.revokeObjectURL(userFace);
       }
       const imageUrl = URL.createObjectURL(file);
-      setUserFace(imageUrl);
       stopCamera();
+      processUserFace(imageUrl);
     }
-    // Reset input value so the same file can be uploaded again if needed
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -118,10 +223,11 @@ export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product
       if (context) {
         canvasRef.current.width = videoRef.current.videoWidth;
         canvasRef.current.height = videoRef.current.videoHeight;
+        // Mirror the image back before capturing if needed, but standard is fine
         context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
         const imageUrl = canvasRef.current.toDataURL('image/png');
-        setUserFace(imageUrl);
         stopCamera();
+        processUserFace(imageUrl);
       }
     }
   };
@@ -146,17 +252,24 @@ export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product
               </div>
             ) : (
               <div className="try-on-image-wrapper">
-                <img src={product.tryOnImage} alt={product.name} className="try-on-main-image" />
-                {userFace && (
+                <img 
+                  ref={modelImgRef}
+                  src={product.tryOnImage} 
+                  alt={product.name} 
+                  className="try-on-main-image" 
+                  crossOrigin="anonymous"
+                />
+                {isProcessing && (
+                  <div className="ai-processing-overlay">
+                    <div className="ai-spinner"></div>
+                    <p>AI Face Mapping...</p>
+                  </div>
+                )}
+                {croppedUserFace && (
                   <img 
-                    src={userFace} 
+                    src={croppedUserFace} 
                     alt="User Face" 
-                    className="user-face-overlay" 
-                    style={{
-                      top: `${facePosition.top}%`,
-                      left: `${facePosition.left}%`,
-                      width: `${facePosition.size}%`,
-                    }}
+                    style={overlayStyle}
                   />
                 )}
               </div>
@@ -172,47 +285,36 @@ export const TryOnModal: React.FC<TryOnModalProps> = ({ isOpen, onClose, product
             
             <div className="personalize-controls">
               <h3>Personalize Try-On</h3>
-              <div className="control-buttons">
-                <button className="action-btn" onClick={triggerFileInput}>
-                  Upload Photo
-                </button>
-                <input 
-                  type="file" 
-                  ref={fileInputRef} 
-                  onChange={handleFileUpload} 
-                  accept="image/*" 
-                  style={{ display: 'none' }} 
-                />
-                {!isCameraActive ? (
-                  <button className="action-btn" onClick={startCamera}>
-                    Use Camera
-                  </button>
-                ) : (
-                  <button className="action-btn cancel-btn" onClick={stopCamera}>
-                    Cancel Camera
-                  </button>
-                )}
-              </div>
-              {userFace && (
+              {!isModelsLoaded ? (
+                <p style={{ color: '#c9a96e', fontSize: '0.9rem' }}>Loading AI Models...</p>
+              ) : (
                 <>
-                  <div className="face-adjust-controls">
-                    <h4 style={{ color: '#c9a96e', fontSize: '0.9rem', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '1px' }}>Adjust Position & Size</h4>
-                    <div className="slider-group">
-                      <label>Up / Down</label>
-                      <input type="range" min="0" max="100" value={facePosition.top} onChange={(e) => setFacePosition({...facePosition, top: Number(e.target.value)})} />
-                    </div>
-                    <div className="slider-group">
-                      <label>Left / Right</label>
-                      <input type="range" min="0" max="100" value={facePosition.left} onChange={(e) => setFacePosition({...facePosition, left: Number(e.target.value)})} />
-                    </div>
-                    <div className="slider-group">
-                      <label>Size</label>
-                      <input type="range" min="5" max="50" value={facePosition.size} onChange={(e) => setFacePosition({...facePosition, size: Number(e.target.value)})} />
-                    </div>
+                  <div className="control-buttons">
+                    <button className="action-btn" onClick={triggerFileInput} disabled={isProcessing}>
+                      Upload Photo
+                    </button>
+                    <input 
+                      type="file" 
+                      ref={fileInputRef} 
+                      onChange={handleFileUpload} 
+                      accept="image/*" 
+                      style={{ display: 'none' }} 
+                    />
+                    {!isCameraActive ? (
+                      <button className="action-btn" onClick={startCamera} disabled={isProcessing}>
+                        Use Camera
+                      </button>
+                    ) : (
+                      <button className="action-btn cancel-btn" onClick={stopCamera}>
+                        Cancel Camera
+                      </button>
+                    )}
                   </div>
-                  <button className="action-btn reset-btn" onClick={handleReset} style={{ marginTop: '10px' }}>
-                    Reset Face
-                  </button>
+                  {userFace && !isProcessing && (
+                    <button className="action-btn reset-btn" onClick={handleReset} style={{ marginTop: '15px' }}>
+                      Reset Face
+                    </button>
+                  )}
                 </>
               )}
             </div>
