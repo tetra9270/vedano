@@ -46,7 +46,7 @@ export const ServicesWeOffer: React.FC = () => {
             <div 
               className="service-card fade-in-up" 
               key={index}
-              style={{ animationDelay: `${0.2 + index * 0.15}s` }}
+              style={{ animationDelay: `${0.4 + index * 0.3}s` }}
             >
               <div className="service-image-wrapper">
                 <img src={service.image} alt={service.title} className="service-image" />

@@ -87,10 +87,10 @@
   font-size: 5rem;
   font-weight: 200;
   color: #c9a96e;
-  opacity: 0.3;
+  opacity: 0.5;
   line-height: 1;
   display: block;
-  margin-bottom: -20px;
+  margin-bottom: 10px;
 }
 
 .process-title {
