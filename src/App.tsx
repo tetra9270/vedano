@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { HeroVideo } from './components/HeroVideo';
 import { BrandStatement } from './components/BrandStatement';
-import { HideawaySection } from './components/HideawaySection';
 import { SeasonalExperiences } from './components/SeasonalExperiences';
 import { AboutUs } from './components/AboutUs';
 import { Blogs } from './components/Blogs';
@@ -38,9 +37,8 @@ function App() {
         ) : (
           <>
             <HeroVideo />
-            <FabricSuits />
             <BrandStatement />
-            <HideawaySection />
+            <FabricSuits />
             <SeasonalExperiences />
             <ServicesWeOffer />
             <Blogs />
