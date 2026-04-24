@@ -189,11 +189,16 @@
   box-shadow: 0 5px 15px rgba(201, 169, 110, 0.3);
 }
 
-/* Animations */
-.fade-in-up {
+/* Animations - only trigger when section scrolled into view */
+.fabric-suits-section .fade-in-up {
   opacity: 0;
   transform: translateY(30px);
-  animation: fadeInUp 0.8s ease forwards;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fabric-suits-section.animate-now .fade-in-up {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @keyframes fadeInUp {

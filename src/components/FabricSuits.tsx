@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './FabricSuits.css';
 import { TryOnModal } from './TryOnModal';
 
@@ -87,6 +87,23 @@ const products: Product[] = [
 export const FabricSuits: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-now');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleTryItClick = (product: Product) => {
     setSelectedProduct(product);
@@ -99,7 +116,7 @@ export const FabricSuits: React.FC = () => {
   };
 
   return (
-    <section className="fabric-suits-section">
+    <section className="fabric-suits-section" ref={sectionRef}>
       <div className="fabric-suits-container">
         <div className="fabric-suits-header">
           <h2 className="fade-in-up">Masterpiece Collection</h2>
