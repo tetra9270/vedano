@@ -82,16 +82,18 @@ export const Footer = () => {
                 </ul>
                 {region.region === 'Atelier Location' && (
                   <div className="footer-map-container" style={{ marginTop: '20px', borderRadius: '4px', overflow: 'hidden', height: '150px', width: '100%' }}>
-                    <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115681.29592731265!2d55.1453939!3d25.0750095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sus!4v1713898192345!5m2!1sen!2sus" 
-                      width="100%" 
-                      height="100%" 
-                      style={{ border: 0 }} 
-                      allowFullScreen={true} 
-                      loading="lazy" 
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="Vedano Dubai Location"
-                    ></iframe>
+                    <a href="https://maps.google.com/maps?q=Vedano+Bespoke,+Binary+Tower,+315+-+Business+Bay+-+Dubai+-+United+Arab+Emirates" target="_blank" rel="noopener noreferrer" style={{ display: 'block', height: '100%' }}>
+                      <iframe 
+                        src="https://maps.google.com/maps?q=Binary%20Tower,%20315%20-%20Business%20Bay%20-%20Dubai%20-%20United%20Arab%20Emirates&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                        width="100%" 
+                        height="100%" 
+                        style={{ border: 0, pointerEvents: 'none' }} 
+                        allowFullScreen={true} 
+                        loading="lazy" 
+                        referrerPolicy="no-referrer-when-downgrade"
+                        title="Vedano Bespoke Dubai Location"
+                      ></iframe>
+                    </a>
                   </div>
                 )}
               </div>
@@ -107,10 +109,10 @@ export const Footer = () => {
           <span className="social-label">{t('footer.followUs')}</span>
           {/* ... existing social icons ... */}
           <div className="social-icons">
-            <a href="#ig" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+            <a href="https://www.instagram.com/vedanobespoke/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
             <a href="#x" aria-label="X"><i className="fab fa-x-twitter"></i></a>
             <a href="#yt" aria-label="YouTube"><i className="fab fa-youtube"></i></a>
-            <a href="#fb" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100087931501356" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
             <a href="#wa" aria-label="WhatsApp"><i className="fab fa-whatsapp"></i></a>
             <a href="#tiktok" aria-label="TikTok"><i className="fab fa-tiktok"></i></a>
           </div>

@@ -70,6 +70,10 @@ export const SeasonalExperiences = () => {
             <p className="seasonal-intro">
               {t('seasonal.intro')}
             </p>
+            <div className="scroll-indicator">
+              <span>Scroll</span>
+              <i className="fas fa-arrow-right"></i>
+            </div>
           </div>
           
           {EXPERIENCES.map(exp => (

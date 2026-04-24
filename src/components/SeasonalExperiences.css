@@ -26,6 +26,32 @@
   max-width: 600px;
   color: #4a4a4a;
   font-weight: 300;
+  margin-bottom: 24px;
+}
+
+.scroll-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #2b2b2b;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
+}
+
+.scroll-indicator i {
+  animation: slideRight 1.5s infinite;
+}
+
+@keyframes slideRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
 }
 
 .seasonal-scroll-container {

@@ -51,6 +51,7 @@ export const Header = ({ onOpenBooking }: { onOpenBooking: () => void }) => {
           <a href="/" className="nav-link">{t('header.home')}</a>
           <a href="/about" className="nav-link">{t('header.aboutUs')}</a>
           <a href="/blogs" className="nav-link">{t('header.blogs')}</a>
+          <a href="/process" className="nav-link">Our Process</a>
         </nav>
       </div>
 
@@ -103,6 +104,7 @@ export const Header = ({ onOpenBooking }: { onOpenBooking: () => void }) => {
             <a href="/" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>{t('header.home')}</a>
             <a href="/about" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>{t('header.aboutUs')}</a>
             <a href="/blogs" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>{t('header.blogs')}</a>
+            <a href="/process" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Our Process</a>
             
             <div className="mobile-lang-selector">
               {LANGUAGES.map(lang => (
@@ -134,15 +136,15 @@ export const Header = ({ onOpenBooking }: { onOpenBooking: () => void }) => {
             />
             {searchQuery && (
               <div className="search-results-box">
-                {['Home', 'About Us', 'Blogs']
+                {['Home', 'About Us', 'Blogs', 'Our Process']
                   .filter(item => item.toLowerCase().includes(searchQuery.toLowerCase()))
                   .map((result, idx) => (
                   <a 
                     key={idx} 
-                    href={result === 'Home' ? '/' : `/${result.toLowerCase().replace(' ', '')}`} 
+                    href={result === 'Home' ? '/' : result === 'Our Process' ? '/process' : `/${result.toLowerCase().replace(' ', '')}`} 
                     className="search-result-link"
                   >
-                    {result === 'Home' ? t('header.home') : result === 'About Us' ? t('header.aboutUs') : t('header.blogs')}
+                    {result === 'Home' ? t('header.home') : result === 'About Us' ? t('header.aboutUs') : result === 'Blogs' ? t('header.blogs') : 'Our Process'}
                   </a>
                 ))}
               </div>

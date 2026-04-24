@@ -10,6 +10,8 @@ import { Blogs } from './components/Blogs';
 import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
 import { FabricSuits } from './components/FabricSuits';
+import { ServicesWeOffer } from './components/ServicesWeOffer';
+import { OurProcess } from './components/OurProcess';
 import './App.css';
 
 function App() {
@@ -32,14 +34,17 @@ function App() {
           <AboutUs onOpenBooking={() => setIsBookingOpen(true)} />
         ) : path === '/blogs' ? (
           <Blogs />
+        ) : path === '/process' ? (
+          <OurProcess />
         ) : (
           <>
             <HeroVideo />
+            <FabricSuits />
+            <ServicesWeOffer />
             <BrandStatement />
             <HideawaySection />
             <SeasonalExperiences />
-            <FabricSuits />
-            <WorldOfVedano />
+            <Blogs />
           </>
         )}
       </main>

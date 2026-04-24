@@ -36,7 +36,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 40px;
-  perspective: 1000px; /* Gives the 3D effect space to work */
 }
 
 .suit-card-wrapper {
@@ -201,3 +200,5 @@
     transform: translateY(0);
   }
 }
+
+@media (max-width: 480px) { .suits-grid { grid-template-columns: 1fr; gap: 20px; } .fabric-suits-section { padding: 60px 5%; } }

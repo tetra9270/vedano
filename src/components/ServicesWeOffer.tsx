@@ -1,0 +1,61 @@
+import React, { useEffect, useRef } from 'react';
+import './ServicesWeOffer.css';
+
+// Using existing high-quality assets as placeholders
+import occasionImg from '../assets/grey_checkered_jacket_1776977362527.png';
+import weddingImg from '../assets/vedano_bespoke_detail.png';
+import formalImg from '../assets/vedano_suit_precision.png';
+import casualImg from '../assets/beige_suit_worn_1776975989678.png';
+
+export const ServicesWeOffer: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-now');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const services = [
+    { title: 'Occasion Wear', image: occasionImg },
+    { title: 'Wedding Wear', image: weddingImg },
+    { title: 'Formal & Corporate Wear', image: formalImg },
+    { title: 'Casual Wear', image: casualImg },
+  ];
+
+  return (
+    <section className="services-offer-section" ref={sectionRef}>
+      <div className="services-offer-container">
+        <h2 className="services-offer-title fade-in-up">SERVICES WE OFFER</h2>
+        <div className="services-offer-grid">
+          {services.map((service, index) => (
+            <div 
+              className="service-card fade-in-up" 
+              key={index}
+              style={{ animationDelay: `${0.2 + index * 0.15}s` }}
+            >
+              <div className="service-image-wrapper">
+                <img src={service.image} alt={service.title} className="service-image" />
+              </div>
+              <h3 className="service-title">{service.title}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
