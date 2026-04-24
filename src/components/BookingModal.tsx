@@ -12,6 +12,8 @@ export const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    countryCode: '+971',
+    phone: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,7 +53,7 @@ export const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
         setIsSuccess(true);
         setTimeout(() => {
           setIsSuccess(false);
-          setFormData({ name: '', email: '', message: '' });
+          setFormData({ name: '', email: '', countryCode: '+971', phone: '', message: '' });
           onClose();
         }, 3000);
       } else {
@@ -101,6 +103,39 @@ export const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
                   disabled={isSubmitting}
+                />
+                <span className="input-focus-line"></span>
+              </div>
+              <div className="form-group phone-group">
+                <select 
+                  className="country-code-select"
+                  value={formData.countryCode}
+                  onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
+                  disabled={isSubmitting}
+                >
+                  <option value="+971">UAE (+971)</option>
+                  <option value="+1">USA/CAN (+1)</option>
+                  <option value="+44">UK (+44)</option>
+                  <option value="+966">KSA (+966)</option>
+                  <option value="+974">Qatar (+974)</option>
+                  <option value="+965">Kuwait (+965)</option>
+                  <option value="+973">Bahrain (+973)</option>
+                  <option value="+968">Oman (+968)</option>
+                  <option value="+91">India (+91)</option>
+                  <option value="+92">Pakistan (+92)</option>
+                  <option value="+33">France (+33)</option>
+                  <option value="+49">Germany (+49)</option>
+                  <option value="+39">Italy (+39)</option>
+                  <option value="+61">Australia (+61)</option>
+                </select>
+                <input 
+                  type="tel" 
+                  placeholder="Phone Number"
+                  required 
+                  value={formData.phone}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  disabled={isSubmitting}
+                  className="phone-input"
                 />
                 <span className="input-focus-line"></span>
               </div>

@@ -26,7 +26,7 @@ const appendToExcel = (data) => {
   } else {
     // Create new workbook
     workbook = xlsx.utils.book_new();
-    const headers = [['Date', 'Name', 'Email', 'Message']];
+    const headers = [['Date', 'Name', 'Email', 'Phone', 'Message']];
     const ws = xlsx.utils.aoa_to_sheet(headers);
     xlsx.utils.book_append_sheet(workbook, ws, sheetName);
   }
@@ -35,10 +35,12 @@ const appendToExcel = (data) => {
   const existingData = xlsx.utils.sheet_to_json(sheet, { header: 1 });
   
   // Append new row
+  const fullPhone = data.phone ? `${data.countryCode || ''} ${data.phone}`.trim() : '';
   existingData.push([
     new Date().toLocaleString(),
     data.name,
     data.email,
+    fullPhone,
     data.message
   ]);
 
@@ -50,13 +52,13 @@ const appendToExcel = (data) => {
 
 app.post('/api/book', (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    const { name, email, countryCode, phone, message } = req.body;
     
-    if (!name || !email) {
-      return res.status(400).json({ error: 'Name and email are required.' });
+    if (!name || !email || !phone) {
+      return res.status(400).json({ error: 'Name, email, and phone number are required.' });
     }
 
-    appendToExcel({ name, email, message });
+    appendToExcel({ name, email, countryCode, phone, message });
     
     res.status(200).json({ success: true, message: 'Appointment booked successfully.' });
   } catch (error) {

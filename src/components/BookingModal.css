@@ -44,6 +44,52 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+.appointment-form input,
+.appointment-form textarea {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #f6f5f0;
+  outline: none;
+  font-family: inherit;
+}
+
+.phone-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.country-code-select {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(246, 245, 240, 0.2);
+  color: #f6f5f0;
+  font-size: 1rem;
+  padding: 12px 5px 12px 0;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  width: 120px;
+  flex-shrink: 0;
+}
+
+.country-code-select option {
+  background-color: #0a0b10;
+  color: #f6f5f0;
+}
+
+.phone-input {
+  flex-grow: 1;
+}
+
+.appointment-form input::placeholder,
+.appointment-form textarea::placeholder {
+  color: rgba(246, 245, 240, 0.5);
+}
+
 .booking-modal-close {
   position: absolute;
   top: 15px;
