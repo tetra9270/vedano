@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import './ServicesWeOffer.css';
 
 // Using existing high-quality assets as placeholders
-import occasionImg from '../assets/grey_checkered_jacket_1776977362527.png';
-import weddingImg from '../assets/vedano_bespoke_detail.png';
-import formalImg from '../assets/vedano_suit_precision.png';
+import occasionImg from '../assets/vedano_evening_wear.png';
+import weddingImg from '../assets/black_tuxedo_worn_1776977341305.png';
+import formalImg from '../assets/navy_suit_worn_1776975889192.png';
 import casualImg from '../assets/beige_suit_worn_1776975989678.png';
 
 export const ServicesWeOffer: React.FC = () => {
