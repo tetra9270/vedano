@@ -126,7 +126,7 @@ export const FabricSuits: React.FC = () => {
         </div>
 
         <div className="suits-grid">
-          {products.map((product, index) => (
+          {products.map((product) => (
             <div 
               className="suit-card-wrapper" 
               key={product.id}
