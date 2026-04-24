@@ -45,7 +45,7 @@ export const OurProcess: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -64,15 +64,15 @@ export const OurProcess: React.FC = () => {
   return (
     <div className="process-page">
       <div className="process-hero">
-        <h1 className="process-main-title fade-in-up">The Suit Makers Process</h1>
+        <h1 className="process-main-title fade-in-up">The Bespoke Experience</h1>
         <p className="process-subtitle fade-in-up" style={{ animationDelay: '0.2s' }}>How it works</p>
       </div>
-      
+
       <div className="process-timeline">
         <div className="timeline-line"></div>
         {processSteps.map((step, idx) => (
-          <div 
-            key={idx} 
+          <div
+            key={idx}
             className={`process-step ${idx % 2 === 0 ? 'left' : 'right'}`}
             ref={el => { stepRefs.current[idx] = el; }}
           >
@@ -81,7 +81,7 @@ export const OurProcess: React.FC = () => {
               <h2 className="process-title">{step.title}</h2>
               <p className="process-desc">{step.desc}</p>
             </div>
-            
+
             <div className="process-image-box">
               <div className="img-wrapper">
                 <img src={step.img} alt={step.title} />
@@ -90,7 +90,7 @@ export const OurProcess: React.FC = () => {
           </div>
         ))}
       </div>
-      
+
       <div className="process-footer">
         <h2 className="fade-in-up">Experience the Journey</h2>
         <p className="fade-in-up" style={{ animationDelay: '0.2s' }}>Secure your entry into the world of Bespoke Vedano today.</p>
