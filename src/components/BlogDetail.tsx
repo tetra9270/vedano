@@ -18,7 +18,7 @@ export const BlogDetail = ({ id }: BlogDetailProps) => {
   const title = t(`blogs.items.${id}.title`);
   const date = t(`blogs.items.${id}.date`);
   // Content might be an array of strings
-  const content = t(`blogs.items.${id}.content`, { returnObjects: true }) as string[] | string;
+  const content = t(`blogs.items.${id}.content`) as string[] | string;
 
   // If content is just the fallback key name, we'll display a coming soon message
   const isMissingContent = !content || typeof content === 'string' && content.startsWith('blogs.items');

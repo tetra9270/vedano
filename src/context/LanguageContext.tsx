@@ -10,7 +10,7 @@ type Dictionary = typeof en;
 interface LanguageContextType {
   language: LanguageCode;
   setLanguage: (lang: LanguageCode) => void;
-  t: (key: string) => string;
+  t: (key: string) => any;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -28,7 +28,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     document.documentElement.lang = language;
   }, [language]);
 
-  const t = (path: string): string => {
+  const t = (path: string): any => {
     const keys = path.split('.');
     let current: any = dictionaries[language];
     for (const key of keys) {
@@ -38,7 +38,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
       }
       current = current[key];
     }
-    return current as string;
+    return current;
   };
 
   return (

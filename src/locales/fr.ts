@@ -136,7 +136,8 @@ export const fr = {
         category: 'SUR-MESURE',
         title: 'Vous ne possédez probablement pas un costume sur mesure',
         excerpt: 'La vérité est que la plupart de ce qui est vendu comme sur-mesure ne l\'est pas. C\'est tout autre chose...',
-        date: '8 Mai 2026'
+        date: '8 Mai 2026',
+        content: []
       }
     }
   }
