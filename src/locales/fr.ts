@@ -131,6 +131,12 @@ export const fr = {
         title: 'Les Détails Invisibles',
         excerpt: 'Exploration des éléments cousus main qui définissent un véritable vêtement sur mesure.',
         date: '15 Septembre 2026'
+      },
+      4: {
+        category: 'SUR-MESURE',
+        title: 'Vous ne possédez probablement pas un costume sur mesure',
+        excerpt: 'La vérité est que la plupart de ce qui est vendu comme sur-mesure ne l\'est pas. C\'est tout autre chose...',
+        date: '8 Mai 2026'
       }
     }
   }

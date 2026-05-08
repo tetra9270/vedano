@@ -5,6 +5,7 @@ import { BrandStatement } from './components/BrandStatement';
 import { SeasonalExperiences } from './components/SeasonalExperiences';
 import { AboutUs } from './components/AboutUs';
 import { Blogs } from './components/Blogs';
+import { BlogDetail } from './components/BlogDetail';
 import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
 import { FabricSuits } from './components/FabricSuits';
@@ -32,6 +33,8 @@ function App() {
           <AboutUs onOpenBooking={() => setIsBookingOpen(true)} />
         ) : path === '/blogs' ? (
           <Blogs />
+        ) : path.startsWith('/blogs/') ? (
+          <BlogDetail id={path.split('/')[2]} />
         ) : path === '/process' ? (
           <OurProcess />
         ) : (

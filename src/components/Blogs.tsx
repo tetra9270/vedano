@@ -4,6 +4,7 @@ import './Blogs.css';
 import blog1Img from '../assets/vedano_fabric_selection.png';
 import blog2Img from '../assets/vedano_evening_wear.png';
 import blog3Img from '../assets/vedano_bespoke_detail.png';
+import blog4Img from '../assets/bespoke_suit_blog.png';
 
 export const Blogs = () => {
   const { t } = useLanguage();
@@ -51,6 +52,14 @@ export const Blogs = () => {
       title: t('blogs.items.3.title'),
       excerpt: t('blogs.items.3.excerpt'),
       date: t('blogs.items.3.date')
+    },
+    {
+      id: 4,
+      image: blog4Img,
+      category: t('blogs.items.4.category'),
+      title: t('blogs.items.4.title'),
+      excerpt: t('blogs.items.4.excerpt'),
+      date: t('blogs.items.4.date')
     }
   ];
 
